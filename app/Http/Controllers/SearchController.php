@@ -5,36 +5,43 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Goal;
-use Auth;
+use App\Models\User;
 
-
-class FavoriteController extends Controller
+class SearchController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
-    }
 
+       
+public function index(Request $request)
+{
+  $keyword = trim($request->keyword);
+  $users  = User::where('name', 'like', "%{$keyword}%")->pluck('id')->all();
+  $latestgoals = Goal::query()
+    ->where('leadership1', 'like', "%{$keyword}%")
+    ->orWhere('communication1', 'like', "%{$keyword}%")
+    ->orWhereIn('user_id', $users)
+    ->get();
+
+  return response()->view('goal.index', compact('latestgoals'));
+}
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
-    }
+  return response()->view('search.input');
+  }
+
 
     /**
      * Store a newly created resource in storage.
      */
-  public function store(Goal $goal)
-  {
-    $goal->users()->attach(Auth::id());
-    return redirect()->route('goal.create');
-  }
-
+    public function store(Request $request)
+    {
+        //
+    }
 
     /**
      * Display the specified resource.
@@ -63,9 +70,8 @@ class FavoriteController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-  public function destroy(Goal $goal)
-  {
-    $goal->users()->detach(Auth::id());
-    return redirect()->route('goal.create');
-  }
+    public function destroy(string $id)
+    {
+        //
+    }
 }

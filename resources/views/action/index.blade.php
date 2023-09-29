@@ -3,60 +3,79 @@
     <div class="max-w-7xl mx-auto sm:w-10/12 md:w-8/10 lg:w-8/12">
 
       <!-- リーダーシップのボックス -->
-      <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6 p-6">
+      <div class="dark:bg-gray-800 overflow-hidden sm:rounded-lg mb-6 p-6">
         @include('common.errors')
-        <form class="mb-6" action="{{ route('goal.store') }}" method="POST">
+        <form class="mb-6" action="{{ route('action.store') }}" method="POST">
           @csrf
           
           
-          <x-input-label for="leadership1" :value="__('リーダーシップ')" class="custom-leadership-style" />    
+      <!-- 全社目標のボックス -->
+      <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6 p-6">
+        <x-input-label for="action1" :value="__('全社目標')" class="custom-leadership-style"/>
 
-          <div class="flex flex-col mb-4">    
-            <x-input-label for="leadership1" :value="__('100%達成目標')" />
-            <x-text-input id="leadership1" class="block mt-1 w-full custom-input-style" type="text" name="leadership1" :value="old('leadership1')" required autofocus />
-            <x-input-error :messages="$errors->get('leadership1')" class="mt-2" />
-          </div>
-
-          <div class="flex flex-col mb-4">
-            <x-input-label for="leadership2" :value="__('80%達成目標')" />
-            <x-text-input id="leadership2" class="block mt-1 w-full custom-input-style" type="text" name="leadership2" :value="old('leadership2')" required autofocus />
-            <x-input-error :messages="$errors->get('leadership2')" class="mt-2" />
-          </div>
+        <div class="flex flex-col mb-4">
+          <x-input-label for="action1" :value="__('アクションプラン①')" />
+          <x-text-input id="action1" class="block mt-1 w-full custom-input-style" type="text" name="action1" :value="old('action1')" required autofocus />
+          <x-input-error :messages="$errors->get('action1')" class="mt-2" />
         </div>
+
+        <div class="flex flex-col mb-4">
+          <x-input-label for="action2" :value="__('アクションプラン②')" />
+          <x-text-input id="action2" class="block mt-1 w-full custom-input-style" type="text" name="action2" :value="old('action2')" required autofocus />
+          <x-input-error :messages="$errors->get('action2')" class="mt-2" />
+        </div>
+           
+        <div class="flex flex-col mb-4">
+          <x-input-label for="action3" :value="__('アクションプラン③')" />
+          <x-text-input id="action3" class="block mt-1 w-full custom-input-style" type="text" name="action3" :value="old('action3')" required autofocus />
+          <x-input-error :messages="$errors->get('action3')" class="mt-2" />
+        </div>
+      </div>
 
       <!-- コミュニケーションのボックス -->
       <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6 p-6">
-        <x-input-label for="communication1" :value="__('コミュニケーション')" class="custom-leadership-style"/>
+        <x-input-label for="action4" :value="__('部門目標')" class="custom-leadership-style"/>
 
         <div class="flex flex-col mb-4">
-          <x-input-label for="communication1" :value="__('100%達成目標')" />
-          <x-text-input id="communication1" class="block mt-1 w-full custom-input-style" type="text" name="communication1" :value="old('communication1')" required autofocus />
-          <x-input-error :messages="$errors->get('communication1')" class="mt-2" />
+          <x-input-label for="action4" :value="__('アクションプラン①')" />
+          <x-text-input id="action4" class="block mt-1 w-full custom-input-style" type="text" name="action4" :value="old('action4')" required autofocus />
+          <x-input-error :messages="$errors->get('action4')" class="mt-2" />
         </div>
 
         <div class="flex flex-col mb-4">
-          <x-input-label for="communication2" :value="__('80％達成目標')" />
-          <x-text-input id="communication2" class="block mt-1 w-full custom-input-style" type="text" name="communication2" :value="old('communication2')" required autofocus />
-          <x-input-error :messages="$errors->get('communication2')" class="mt-2" />
+          <x-input-label for="action5" :value="__('アクションプラン②')" />
+          <x-text-input id="action5" class="block mt-1 w-full custom-input-style" type="text" name="action5" :value="old('action5')" required autofocus />
+          <x-input-error :messages="$errors->get('action5')" class="mt-2" />
+        </div>
+           
+        <div class="flex flex-col mb-4">
+          <x-input-label for="action6" :value="__('アクションプラン③')" />
+          <x-text-input id="action6" class="block mt-1 w-full custom-input-style" type="text" name="action6" :value="old('action6')" required autofocus />
+          <x-input-error :messages="$errors->get('action6')" class="mt-2" />
         </div>
       </div>
 
       <!-- 問題解決力のボックス -->
       <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6 p-6">
-        <x-input-label for="issue1" :value="__('問題解決力')" class="custom-leadership-style"/>
+        <x-input-label for="issue1" :value="__('個人目標')" class="custom-leadership-style"/>
 
         <div class="flex flex-col mb-4">
-          <x-input-label for="issue1" :value="__('100％目標')" />
-          <x-text-input id="issue1" class="block mt-1 w-full custom-input-style" type="text" name="issue1" :value="old('issue1')" required autofocus />
-          <x-input-error :messages="$errors->get('issue1')" class="mt-2" />
+          <x-input-label for="action7" :value="__('アクションプラン①')" />
+          <x-text-input id="action7" class="block mt-1 w-full custom-input-style" type="text" name="action7" :value="old('action7')" required autofocus />
+          <x-input-error :messages="$errors->get('action7')" class="mt-2" />
         </div>
 
         <div class="flex flex-col mb-4">
-          <x-input-label for="issue2" :value="__('80％目標')" />
-          <x-text-input id="issue2" class="block mt-1 w-full custom-input-style" type="text" name="issue2" :value="old('issue2')" required autofocus />
-          <x-input-error :messages="$errors->get('issue2')" class="mt-2" />
+          <x-input-label for="action8" :value="__('アクションプラン②')" />
+          <x-text-input id="action8" class="block mt-1 w-full custom-input-style" type="text" name="action8" :value="old('action8')" required autofocus />
+          <x-input-error :messages="$errors->get('action8')" class="mt-2" />
         </div>
-        
+
+        <div class="flex flex-col mb-4">
+          <x-input-label for="action9" :value="__('アクションプラン③')" />
+          <x-text-input id="action9" class="block mt-1 w-full custom-input-style" type="text" name="action9" :value="old('action9')" required autofocus />
+          <x-input-error :messages="$errors->get('action9')" class="mt-2" />
+        </div>
       </div>
  
 
@@ -81,7 +100,7 @@
 
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      {{ __('目標設定を行いましょう（能力行動項目）') }}
+      {{ __('目標設定を行いましょう（業績項目）') }}
     </h2>
   </x-slot>
 
@@ -107,15 +126,73 @@
   @foreach ($latestgoals as $goal)
   <tr class="hover:bg-gray-lighter">
     <td class="py-4 px-6 border-b border-gray-light dark:border-gray-600">
-      <x-input-label for="leadership1" :value="__('リーダーシップ')" class="custom-leadership-style text-left" />    
+      <x-input-label for="action1" :value="__('全社目標')" class="custom-leadership-style text-left" />    
 
      <div>
-      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">100%達成目標：{{$goal->leadership1}}</p>
+      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">①{{$goal->action1}}</p>
      </div>
       
       <div>
-      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">80%達成目標：{{$goal->leadership2}}</p>
+      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">②{{$goal->acton2}}</p>
       </div>
+      
+     <div>
+      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">③{{$goal->acton3}}</p>
+      </div>
+      
+      
+    </td>
+  </tr>
+  @endforeach
+</tbody>
+ </div>
+ 
+ <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6 p-6 box-style">
+<tbody>
+  @foreach ($latestgoals as $goal)
+  <tr class="hover:bg-gray-lighter">
+    <td class="py-4 px-6 border-b border-gray-light dark:border-gray-600">
+      <x-input-label for="action4" :value="__('部門目標')" class="custom-leadership-style text-left" />    
+
+     <div>
+      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">①{{$goal->action4}}</p>
+     </div>
+      
+      <div>
+      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">②{{$goal->acton5}}</p>
+      </div>
+      
+     <div>
+      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">③{{$goal->acton6}}</p>
+      </div>
+      
+      
+    </td>
+  </tr>
+  @endforeach
+</tbody>
+ </div>
+ 
+ <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6 p-6 box-style">
+<tbody>
+  @foreach ($latestgoals as $goal)
+  <tr class="hover:bg-gray-lighter">
+    <td class="py-4 px-6 border-b border-gray-light dark:border-gray-600">
+      <x-input-label for="action7" :value="__('個人目標')" class="custom-leadership-style text-left" />    
+
+     <div>
+      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">①{{$goal->action7}}</p>
+     </div>
+      
+      <div>
+      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">②{{$goal->acton8}}</p>
+      </div>
+      
+     <div>
+      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">③{{$goal->acton9}}</p>
+      </div>
+      
+      
     </td>
   </tr>
   @endforeach
@@ -123,47 +200,10 @@
  </div>
 
 
-<div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6 p-6 box-style">
-<tbody>
-  @foreach ($latestgoals as $goal)
-  <tr class="hover:bg-gray-lighter">
-    <td class="py-4 px-6 border-b border-gray-light dark:border-gray-600">
-      <x-input-label for="leadership1" :value="__('コミュニケーション')" class="custom-leadership-style text-left" />    
-
-     <div>
-      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">100%達成目標：{{$goal->communication1}}</p>
-     </div>
-      
-      <div>
-      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">80%達成目標：{{$goal->communication2}}</p>
-      </div>
-    </td>
-  </tr>
-  @endforeach
-</tbody>
-</div>
 
 
-<div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6 p-6 box-style">
-<tbody>
-  @foreach ($latestgoals as $goal)
-  <tr class="hover:bg-gray-lighter">
-    <td class="py-4 px-6 border-b border-gray-light dark:border-gray-600">
-      <x-input-label for="leadership1" :value="__('問題解決')" class="custom-leadership-style text-left" />    
 
-     <div>
-      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">100%達成目標：{{$goal->issue1}}</p>
-     </div>
-      
-      <div>
-      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">80%達成目標：{{$goal->issue2}}</p>
-      </div>
-    </td>
-  </tr>
-  @endforeach
-</tbody>
-</table>
-</div>
+
 
 
       
@@ -216,23 +256,13 @@
       
            <div class="flex items-center justify-end mt-4">
             <!-- 修正ボタン -->
-            <form action="{{ route('goal.edit', $goal->id) }}" method="GET" class="text-left">
-              @csrf
-              <x-primary-button>
-                <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="gray">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                </svg>
-              </x-primary-button>
-            </form>
+
 
             <!-- Submit ボタン -->
+
             
-            <form action="{{ route('goal.create', $goal->id) }}" method="GET" class="text-left">
-              @csrf
-            <x-primary-button class="ml-3" id="submitButton">
-           {{ __('Submit') }}
-            </x-primary-button>
-            </form>
+            
+            
         </div>
       
       

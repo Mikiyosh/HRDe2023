@@ -22,15 +22,29 @@
                             <tr class="hover:bg-gray-lighter">
                                 <td class="py-4 px-6 border-b border-gray-light dark:border-gray-600">
                                     <h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200">{{ $myLatestGoal->user->name }}</h3>
-                                    <div class="">
-                                        <h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200">リーダーシップ：{{ $myLatestGoal->leadership1 }}</h3>
-                                        <h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200">コミュニケーション：{{ $myLatestGoal->communication1 }}</h3>
-                                        <h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200">問題解決力：{{ $myLatestGoal->issue1 }}</h3>
-                                        <!-- ここにリーダーシップに関する追加情報を表示 -->
+                                   
+                                    <div class="mb-4 border-b pb-4">
+                                        <h3 class="text-left text-lg text-gray-dark dark:text-gray-200 font-bold">リーダーシップ：</h3>
+                                        <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">①{{ $myLatestGoal->leadership1 }}</h3>
+                                        <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">②{{ $myLatestGoal->leadership2 }}</h3>
+                                    </div>
+                                    
+                                    <div class="mb-4 border-b pb-4">
+                                        <h3 class="text-left text-lg text-gray-dark dark:text-gray-200 font-bold">コミュニケーション：</h3>
+                                        <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">①{{ $myLatestGoal->communication1 }}</h3>
+                                        <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">②{{ $myLatestGoal->communication2 }}</h3>
+                                    </div>
+                                    
+                                    <div class="mb-4 border-b pb-4">
+                                        <h3 class="text-left text-lg text-gray-dark dark:text-gray-200 font-bold">問題解決：</h3>
+                                        <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">①{{ $myLatestGoal->issue1 }}</h3>
+                                        <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">②{{ $myLatestGoal->issue2 }}</h3>
                                     </div>
                                 </td>
                             </tr>
                         </tbody>
+                        
+                        
                     </table>
                 </div>
             </div>
@@ -54,39 +68,17 @@
                             @foreach ($otherUsersLatestGoals as $goal)
                             <tr class="hover:bg-gray-lighter">
                                 <td class="py-4 px-6 border-b border-gray-light dark:border-gray-600">
+                                    <a href="{{ route('follow.show', $goal->user->id) }}">
                                     <h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200">{{ $goal->user->name }}</h3>
+                                    </a>
                                     <div class="">
-                                        <h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200">リーダーシップ：{{ $goal->leadership1 }}</h3>
-                                        <h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200">コミュニケーション：{{ $goal->communication1 }}</h3>
-                                        <h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200">問題解決：{{ $goal->issue1 }}</h3>
+                                        <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">リーダーシップ：{{ $goal->leadership1 }}</h3>
+                                        <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">コミュニケーション：{{ $goal->communication1 }}</h3>
+                                        <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">問題解決：{{ $goal->issue1 }}</h3>
                                         <!-- ここにリーダーシップに関する追加情報を表示 -->
                                     </div>
                     
-                                    <div class="flex items-center">
-                                        <!-- follow 状態で条件分岐 -->
-                                        @if(Auth::user()->followings()->where('users.id', $goal->user->id)->exists())
-                                        <!-- unfollow ボタン -->
-                                        <form action="{{ route('unfollow', $goal->user) }}" method="POST" class="text-left">
-                                            @csrf
-                                            <x-primary-button class="ml-3">
-                                                <svg class="h-6 w-6 text-red-500" fill="yellow" viewBox="0 0 24 24" stroke="red">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 17.75l-6.172 3.245 1.179-6.873-4.993-4.867 6.9-1.002L12 2l3.086 6.253 6.9 1.002-4.993 4.867 1.179 6.873z" />
-                                                </svg>
-                                                {{ $goal->user->followers()->count() }}
-                                            </x-primary-button>
-                                        </form>
-                                        @else
-                                        <!-- follow ボタン -->
-                                        <form action="{{ route('follow', $goal->user) }}" method="POST" class="text-left">
-                                            @csrf
-                                            <x-primary-button class="ml-3">
-                                                <svg class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="gray">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 17.75l-6.172 3.245 1.179-6.873-4.993-4.867 6.9-1.002L12 2l3.086 6.253 6.9 1.002-4.993 4.867 1.179 6.873z" />
-                                                </svg>
-                                                {{ $goal->user->followers()->count() }}
-                                            </x-primary-button>
-                                        </form>
-                                        @endif
+                                  
 
                                         <a href="{{ route('goal.show',$goal->id) }}">
                                             <h3 class="text-left font-bold text-lg text-gray-800 dark:text-gray-200">{{$goal->goal}}</h3>

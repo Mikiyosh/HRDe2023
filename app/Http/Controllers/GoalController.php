@@ -51,6 +51,9 @@ public function store(Request $request)
     'leadership1' => 'required | max:191',
     'communication1' => 'required | max:191',
     'issue1' => 'required | max:191',
+    'leadership2' => 'required | max:191',
+    'communication2' => 'required | max:191',
+    'issue2' => 'required | max:191',
 
    
   ]);
@@ -73,11 +76,16 @@ public function store(Request $request)
     /**
      * Display the specified resource.
      */
-public function show($id) // パラメーター名を $id に変更
-{
-    $goal = Goal::find($id);
-    return response()->view('goal.show', compact('goal'));
+    public function show()
+    {
+    $latestgoals = Goal::where('user_id', Auth::user()->id)
+        ->orderBy('updated_at', 'desc')
+        ->take(1)
+        ->get();
+    return response()->view('goal.show', compact('latestgoals'));
 }
+
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -121,12 +129,21 @@ public function update(Request $request, $id)
       public function mydata()
   {
     // Userモデルに定義したリレーションを使用してデータを取得する．
-  
-
-       $latestgoals = Goal::where('user_id', Auth::user()->id)
+    $latestgoals = Goal::where('user_id', Auth::user()->id)
         ->orderBy('updated_at', 'desc')
         ->take(1)
         ->get();
     return response()->view('goal.index', compact('latestgoals')); 
   }
+  
+public function timeline()
+{
+    $latestgoals = Goal::where('user_id', Auth::user()->id)
+        ->orderBy('updated_at', 'desc')
+        ->take(1)
+        ->get();
+    return response()->view('goal.show', compact('latestgoals'));
+}
+   
+  
 }

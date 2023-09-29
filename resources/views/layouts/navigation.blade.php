@@ -1,14 +1,12 @@
-<nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+<nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700  banner">
   <!-- Primary Navigation Menu -->
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between h-16">
       <div class="flex">
         <!-- Logo -->
-        <div class="shrink-0 flex items-center">
-          <a href="{{ route('dashboard') }}">
-            <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
-          </a>
-        </div>
+<div class="shrink-0 flex items-center">
+    <img src="/images/logo.jpg" class="logo-image">
+</div>
 
         <!-- Navigation Links -->
         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -18,31 +16,34 @@
         </div>
         <!-- 🔽 一覧ページへのリンクを追加 -->
 <div class="relative sm:-my-px sm:ml-10 sm:flex goal-setting-tab">
-  <x-nav-link :href="route('goal.index')" :active="request()->routeIs('goal.index')" @mouseenter="showSubMenu = true" @mouseleave="showSubMenu = false">
+  <x-nav-link :active="request()->routeIs('goal.index')" @mouseenter="showSubMenu = true" @mouseleave="showSubMenu = false">
     {{ __('　目標設定　') }}
   </x-nav-link>
-  <div v-show="showSubMenu" class="sub-menu hidden absolute mt-10 py-2 space-y-2 bg-white border border-gray-300 dark:border-gray-700 dark:bg-gray-800 z-10 w-80"> <!-- 幅を80に設定 -->
-    <x-nav-link :href="route('goal.index')" :active="request()->routeIs('goal.index')">
+  <div v-show="showSubMenu" class="sub-menu hidden absolute mt-10 py-2 space-y-2 bg-white border border-gray-300 dark:border-gray-700 dark:bg-gray-800 z-10 w-64"> <!-- 幅を80に設定 -->
+  <x-nav-link :href="route('action.index')" :active="request()->routeIs('action.index')">
       {{ __('業績目標') }}
     </x-nav-link>
     <x-nav-link :href="route('goal.index')" :active="request()->routeIs('goal.index')">
-      {{ __('バリュー項目') }}
+      {{ __('行動目標') }}
     </x-nav-link>
+    
+
+    <x-nav-link :href="route('goal.create')" :active="request()->routeIs('goal.create')">
+      {{ __('Mypage') }}
+    </x-nav-link>
+
   </div>
 </div>
         
-        
-        <!-- 🔽 作成ページへのリンクを追加 -->
         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-          <x-nav-link :href="route('goal.create')" :active="request()->routeIs('goal.create')">
-            {{ __('Mypage') }}
+          <x-nav-link :href="route('goal.timeline')" :active="request()->routeIs('goal.timeline')">
+            {{ __('評価') }}
           </x-nav-link>
         </div>
-   
         
-        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-          <x-nav-link :href="route('goal.mypage')" :active="request()->routeIs('goal.mypage')">
-            {{ __('Mypage') }}
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+          <x-nav-link :href="route('search.input')" :active="request()->routeIs('search.input')">
+            {{ __('Q&A') }}
           </x-nav-link>
         </div>
 
@@ -102,31 +103,42 @@
     </div>
     <!-- 🔽 一覧ページへのリンクを追加 -->
 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex goal-setting-tab">
-  <x-nav-link :href="route('goal.index')" :active="request()->routeIs('goal.index')">
+  <x-nav-link :active="request()->routeIs('goal.index')">
     {{ __('目標設定') }}
   </x-nav-link>
+  
   <div class="sub-menu hidden absolute mt-2 py-2 space-y-2 bg-white border border-gray-300 dark:border-gray-700 dark:bg-gray-800 z-10">
-    <x-nav-link :href="route('goal.index')" :active="request()->routeIs('goal.index')">
-      {{ __('業績目標') }}
+   <x-nav-link :href="route('action.index')" :active="request()->routeIs('action.index')">
+       {{ __('業績目標') }}
     </x-nav-link>
+  
     <x-nav-link :href="route('goal.index')" :active="request()->routeIs('goal.index')">
-      {{ __('バリュー項目') }}
+      {{ __('行動目標') }}
     </x-nav-link>
+       <x-nav-link :href="route('goal.create')" :active="request()->routeIs('goal.create')">
+      {{ __('Mypage') }}
+      </x-nav-link>
+   
+    
+    
   </div>
 </div>
-    <!-- 🔽 作成ページへのリンクを追加 -->
+
+    
+
     <div class="pt-2 pb-3 space-y-1">
-      <x-responsive-nav-link :href="route('goal.create')" :active="request()->routeIs('goal.create')">
-        {{ __('Mypage') }}
+      <x-responsive-nav-link :href="route('goal.timeline')" :active="request()->routeIs('goal.timeline')">
+        {{ __('評価') }}
       </x-responsive-nav-link>
     </div>
     
-
         <div class="pt-2 pb-3 space-y-1">
-      <x-responsive-nav-link :href="route('goal.mypage')" :active="request()->routeIs('goal.mypage')">
-        {{ __('Mypage') }}
+      <x-responsive-nav-link :href="route('search.input')" :active="request()->routeIs('search.input')">
+        {{ __('Q&A') }}
       </x-responsive-nav-link>
     </div>
+    
+    
 
     <!-- Responsive Settings Options -->
     <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
@@ -156,13 +168,32 @@
 
 <style>
   
-  .sub-menu {
-  top: 100%; /* メインメニューの下に配置 */
-  left: 0;
+.goal-setting-tab {
+  position: relative;
 }
 
-/* カーソルを合わせた際にサブメニューを表示 */
+.sub-menu {
+  top: 10%; /* この値を調整して、ずれを修正する */
+  left: 0;
+  display: none; /* 初期状態では非表示にする */
+}
+
 .goal-setting-tab:hover .sub-menu {
   display: block;
+}
+
+
+.logo-image {
+    width: 150px;
+    height: auto;
+    margin-left: -10px;
+  
+}
+
+.banner {
+    position: -webkit-sticky; /* Safari のため */
+    position: sticky;
+    top: 0;
+    z-index: 100; /* 他の要素の上に表示させるためのz-index */
 }
 </style>
