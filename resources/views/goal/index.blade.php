@@ -199,7 +199,7 @@
     <h2 class="mb-4 text-lg font-bold">自身の役割に見合った目標設定ですか？またストレッチな目標になっていますか？</h2>
 <div class="flex justify-between">
   <!-- YES ボタン -->
-  <button id="yesButton3" class="bg-green-500 text-white rounded p-2 w-5/12">YES</button>
+  <button id="yesButton3" class="bg-green-500 text-white rounded p-2 w-5/12">SUBMIT</button>
   <!-- NO ボタン -->
   <button id="noButton3" class="bg-red-500 text-white rounded p-2 w-5/12 ml-2">NO</button>
 </div>
@@ -209,7 +209,7 @@
     
 
         
-        </div>
+</div>
         
 
       </div>

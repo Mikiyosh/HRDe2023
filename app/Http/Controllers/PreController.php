@@ -3,25 +3,24 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Validator;
-use App\Models\Action;
+use App\Models\Pre;
 use Auth;
 use App\Models\User;
-use App\Models\Pre;
 
-class ActionController extends Controller
+class PreController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-    $latestgoals = Action::where('user_id', Auth::user()->id)
+public function index()
+{
+    $latestGoalsForPre = Pre::where('user_id', Auth::user()->id)
         ->orderBy('updated_at', 'desc')
         ->take(1)
-        ->get();
-    return response()->view('action.index', compact('latestgoals'));
+        ->get(); // ここで get() を使ってコレクションを取得
+    
+    return view('pre.index', compact('latestGoalsForPre'));
 }
-
 
     /**
      * Show the form for creating a new resource.
@@ -29,16 +28,16 @@ class ActionController extends Controller
 public function create()
 {
     // ログインユーザーの最新の目標
-    $myLatestAction = Action::where('user_id', Auth::user()->id)
+    $myLatestAction = Pre::where('user_id', Auth::user()->id)
         ->orderBy('updated_at', 'desc')
         ->first();
 
     // ログインユーザー以外のユーザーの最新の目標
-    $otherUsersLatestActions = Action::where('user_id', '!=', Auth::user()->id)
+    $otherUsersLatestActions = Pre::where('user_id', '!=', Auth::user()->id)
         ->orderBy('updated_at', 'desc')
         ->get();
 
-   return view('action.create', compact('myLatestGoal', 'otherUsersLatestGoals','myLatestAction'));
+   return view('pre.create', compact('myLatestGoal', 'otherUsersLatestGoals','myLatestAction'));
 
 }
     /**
@@ -70,9 +69,9 @@ public function store(Request $request)
   // create()は最初から用意されている関数
   // 戻り値は挿入されたレコードの情報
     $data = $request->merge(['user_id' => Auth::user()->id])->all();
-    $result = Action::create($data);
+    $result = Pre::create($data);
   // ルーティング「goal.index」にリクエスト送信（一覧ページに移動）
-  return redirect()->route('action.create');
+  return redirect()->route('pre.create');
 }
 
     /**
@@ -80,28 +79,23 @@ public function store(Request $request)
      */
    public function show()
     {
-    $latestgoals = Action::where('user_id', Auth::user()->id)
+    $latestgoals = Pre::where('user_id', Auth::user()->id)
         ->orderBy('updated_at', 'desc')
         ->take(1)
         ->get();
-    return response()->view('action.show', compact('latestgoals'));
+    return response()->view('pre.show', compact('latestgoals'));
 }
 
     /**
      * Show the form for editing the specified resource.
      */
+// PreController.php の edit メソッド
+// PreController.php
+
 public function edit($id)
 {
-    // アクションデータを取得
-    $action = Action::find($id);
-
-    // データが存在しない場合のエラーハンドリング
-    if (!$action) {
-        abort(404); // もしくは適切なエラーページにリダイレクト
-    }
-
     // プレデータを取得
-    $preData = Pre::find($action->user_id); // ユーザーIDを使ってプレデータを取得
+    $preData = Pre::find($id);
 
     // データが存在しない場合のエラーハンドリング
     if (!$preData) {
@@ -109,8 +103,9 @@ public function edit($id)
     }
 
     // ビューにデータを渡す
-    return view('action.edit', compact('action', 'preData'));
+    return view('action.edit', compact('preData'));
 }
+
 
 
 
@@ -133,7 +128,8 @@ public function update(Request $request, $id)
   
   }
   //データ更新処理
-  $result = Action::find($id)->update($request->all());
+    $data = $request->merge(['user_id' => Auth::user()->id])->all();
+    $result = Pre::create($data);
   return redirect()->route('action.index');
 }
 

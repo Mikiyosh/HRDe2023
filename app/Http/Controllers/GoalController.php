@@ -1,14 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
 use Validator;
 use App\Models\Goal;
-
+use App\Models\Action;
 use Auth;
-
 use App\Models\User;
 
 class GoalController extends Controller
@@ -39,8 +36,14 @@ public function create()
         ->orderBy('updated_at', 'desc')
         ->get();
 
-    return view('goal.create', compact('myLatestGoal', 'otherUsersLatestGoals'));
+    // ログインユーザーの最新のアクション
+    $myLatestAction = Action::where('user_id', Auth::user()->id)
+        ->orderBy('updated_at', 'desc')
+        ->first();
+
+    return view('goal.create', compact('myLatestGoal', 'otherUsersLatestGoals', 'myLatestAction'));
 }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -91,9 +94,16 @@ public function store(Request $request)
      */
 public function edit($id)
 {
-  $goal = Goal::find($id);
-  return response()->view('goal.edit', compact('goal'));
+    $goal = Goal::find($id);
+
+    if (!$goal) {
+        return redirect()->back()->with('error', 'Goal not found');
+    }
+
+    return view('goal.edit', compact('goal'));
 }
+
+
 
     /**
      * Update the specified resource in storage.

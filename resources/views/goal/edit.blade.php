@@ -47,6 +47,21 @@
         <x-input-error :messages="$errors->get('communication2')" class="mt-2" />
 </div>
             
+            
+    
+    
+            
+        <!-- Goal Edit Section -->
+    <div class="goal-section">
+        <!-- ここにGoalの編集部分を記述します。 -->
+    </div>
+
+    <!-- Pre Edit Section -->
+    <div class="pre-section">
+        <!-- ここにPreの編集部分を記述します。$pre変数を使ってデータを表示します。 -->
+    </div>
+    
+    
  
             
             

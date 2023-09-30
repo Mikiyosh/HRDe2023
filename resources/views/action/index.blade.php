@@ -9,6 +9,8 @@
           @csrf
           
           
+
+          
       <!-- 全社目標のボックス -->
       <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6 p-6">
         <x-input-label for="action1" :value="__('全社目標')" class="custom-leadership-style"/>
@@ -123,24 +125,21 @@
 
 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6 p-6 box-style">
 <tbody>
-  @foreach ($latestgoals as $goal)
+  @foreach ($latestgoals as $action)
   <tr class="hover:bg-gray-lighter">
     <td class="py-4 px-6 border-b border-gray-light dark:border-gray-600">
-      <x-input-label for="action1" :value="__('全社目標')" class="custom-leadership-style text-left" />    
-
-     <div>
-      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">①{{$goal->action1}}</p>
-     </div>
+    <x-input-label for="action1" :value="__('全社目標')" class="custom-leadership-style text-left" />    
+    <div>
+      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">①{{$action->action1}}</p>
+    </div>
       
-      <div>
-      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">②{{$goal->acton2}}</p>
-      </div>
+    <div>
+      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">②{{$action->action2}}</p>
+    </div>
       
-     <div>
-      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">③{{$goal->acton3}}</p>
-      </div>
-      
-      
+    <div>
+      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">③{{$action->action3}}</p>
+    </div>
     </td>
   </tr>
   @endforeach
@@ -149,21 +148,21 @@
  
  <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6 p-6 box-style">
 <tbody>
-  @foreach ($latestgoals as $goal)
+  @foreach ($latestgoals as $action)
   <tr class="hover:bg-gray-lighter">
     <td class="py-4 px-6 border-b border-gray-light dark:border-gray-600">
       <x-input-label for="action4" :value="__('部門目標')" class="custom-leadership-style text-left" />    
 
      <div>
-      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">①{{$goal->action4}}</p>
+      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">①{{$action->action4}}</p>
      </div>
       
       <div>
-      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">②{{$goal->acton5}}</p>
+      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">②{{$action->action5}}</p>
       </div>
       
      <div>
-      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">③{{$goal->acton6}}</p>
+      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">③{{$action->action6}}</p>
       </div>
       
       
@@ -175,21 +174,21 @@
  
  <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6 p-6 box-style">
 <tbody>
-  @foreach ($latestgoals as $goal)
+  @foreach ($latestgoals as $action)
   <tr class="hover:bg-gray-lighter">
     <td class="py-4 px-6 border-b border-gray-light dark:border-gray-600">
       <x-input-label for="action7" :value="__('個人目標')" class="custom-leadership-style text-left" />    
 
      <div>
-      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">①{{$goal->action7}}</p>
+      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">①{{$action->action7}}</p>
      </div>
       
       <div>
-      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">②{{$goal->acton8}}</p>
+      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">②{{$action->action8}}</p>
       </div>
       
      <div>
-      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">③{{$goal->acton9}}</p>
+      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">③{{$action->action9}}</p>
       </div>
       
       
@@ -239,7 +238,7 @@
     <h2 class="mb-4 text-lg font-bold">自身の役割に見合った目標設定ですか？またストレッチな目標になっていますか？</h2>
 <div class="flex justify-between">
   <!-- YES ボタン -->
-  <button id="yesButton3" class="bg-green-500 text-white rounded p-2 w-5/12">YES</button>
+  <button id="yesButton3" class="bg-green-500 text-white rounded p-2 w-5/12">SUBMIT</button>
   <!-- NO ボタン -->
   <button id="noButton3" class="bg-red-500 text-white rounded p-2 w-5/12 ml-2">NO</button>
 </div>
@@ -256,13 +255,23 @@
       
            <div class="flex items-center justify-end mt-4">
             <!-- 修正ボタン -->
-
+            <form action="{{ route('action.edit', $action->id) }}" method="GET" class="text-left">
+              @csrf
+              <x-primary-button>
+                <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="gray">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                </svg>
+              </x-primary-button>
+            </form>
 
             <!-- Submit ボタン -->
-
             
-            
-            
+            <form action="{{ route('action.create', $action->id) }}" method="GET" class="text-left">
+              @csrf
+            <x-primary-button class="ml-3" id="submitButton">
+           {{ __('Submit') }}
+            </x-primary-button>
+            </form>
         </div>
       
       

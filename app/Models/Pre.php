@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Pre;
 
-class Action extends Model
+
+class Pre extends Model
 {
-    use HasFactory;
+  use HasFactory;
   protected $guarded = [
     'id',
     'created_at',
@@ -27,4 +29,3 @@ class Action extends Model
     return $this->belongsToMany(User::class)->withTimestamps();
   }
 }
-
