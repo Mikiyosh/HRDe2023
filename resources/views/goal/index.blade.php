@@ -60,20 +60,14 @@
       </div>
  
 
-     <div class="flex items-center justify-end mt-4">
+<div class="flex items-center justify-end mt-4">
 <x-primary-button class="ml-3" id="checkButton">
   {{ __('Check') }}
 </x-primary-button>   
     </div>
-    
-
-    
-  </div>
-
-              
-              
-            </div>
-          </form>
+      </div>
+      </div>
+      </form>
         </div>
       </div>
     </div>
@@ -86,125 +80,8 @@
   </x-slot>
 
 
-  <div class="py-12">
-    <div class="max-w-7xl mx-auto sm:w-10/12 md:w-8/10 lg:w-8/12">
-      <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-        <div class="p-6 bg-white dark:bg-gray-800 border-b border-grey-200 dark:border-gray-800">
-          <table class="text-center w-full border-collapse">
-            
-        <table id="targetElement" class="text-center w-full border-collapse">
-            <thead>
-              <tr>
-                <div data-url="{{ route('goal.index') }}" id="urlData">
-                <th class="py-4 px-6 bg-gray-lightest dark:bg-gray-darkest font-bold uppercase text-lg text-gray-dark dark:text-gray-200 border-b border-grey-light dark:border-grey-dark">目標の確認</th>
-              </div>
-              </tr>
-            </thead>
-        </table>
-
-<div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6 p-6 box-style">
-<tbody>
-  @foreach ($latestgoals as $goal)
-  <tr class="hover:bg-gray-lighter">
-    <td class="py-4 px-6 border-b border-gray-light dark:border-gray-600">
-      <x-input-label for="leadership1" :value="__('リーダーシップ')" class="custom-leadership-style text-left" />    
-
-     <div>
-      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">100%達成目標：{{$goal->leadership1}}</p>
-     </div>
-      
-      <div>
-      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">80%達成目標：{{$goal->leadership2}}</p>
-      </div>
-    </td>
-  </tr>
-  @endforeach
-</tbody>
- </div>
-
-
-<div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6 p-6 box-style">
-<tbody>
-  @foreach ($latestgoals as $goal)
-  <tr class="hover:bg-gray-lighter">
-    <td class="py-4 px-6 border-b border-gray-light dark:border-gray-600">
-      <x-input-label for="leadership1" :value="__('コミュニケーション')" class="custom-leadership-style text-left" />    
-
-     <div>
-      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">100%達成目標：{{$goal->communication1}}</p>
-     </div>
-      
-      <div>
-      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">80%達成目標：{{$goal->communication2}}</p>
-      </div>
-    </td>
-  </tr>
-  @endforeach
-</tbody>
-</div>
-
-
-<div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6 p-6 box-style">
-<tbody>
-  @foreach ($latestgoals as $goal)
-  <tr class="hover:bg-gray-lighter">
-    <td class="py-4 px-6 border-b border-gray-light dark:border-gray-600">
-      <x-input-label for="leadership1" :value="__('問題解決')" class="custom-leadership-style text-left" />    
-
-     <div>
-      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">100%達成目標：{{$goal->issue1}}</p>
-     </div>
-      
-      <div>
-      <h3 class="text-left text-lg text-gray-dark dark:text-gray-200">80%達成目標：{{$goal->issue2}}</p>
-      </div>
-    </td>
-  </tr>
-  @endforeach
-</tbody>
-</table>
-</div>
-
 
       
-<div id="confirmationModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
-   <!-- モーダルの内容 -->
- <div class="bg-white p-6 rounded shadow-lg mx-auto relative z-10" style="max-width: 330px;">
-    <h2 class="mb-4 text-lg font-bold">客観的測定が可能な定量的な目標が設定できましたか？</h2>
-<div class="flex justify-between">
-  <!-- YES ボタン -->
-  <button id="yesButton" class="bg-green-500 text-white rounded p-2 w-5/12">YES</button>
-  <!-- NO ボタン -->
-  <button id="noButton" class="bg-red-500 text-white rounded p-2 w-5/12 ml-2">NO</button>
-</div>
-  </div>
-</div>
-
-<div id="confirmationModal2" class="fixed inset-0 flex items-center justify-center z-50 hidden">
-   <!-- モーダルの内容 -->
- <div class="bg-white p-6 rounded shadow-lg mx-auto relative z-10" style="max-width: 330px;">
-    <h2 class="mb-4 text-lg font-bold">半年後の自身または上司が測定することが可能な目標設定ですか？</h2>
-<div class="flex justify-between">
-  <!-- YES ボタン -->
-  <button id="yesButton2" class="bg-green-500 text-white rounded p-2 w-5/12">YES</button>
-  <!-- NO ボタン -->
-  <button id="noButton2" class="bg-red-500 text-white rounded p-2 w-5/12 ml-2">NO</button>
-</div>
-  </div>
-</div>
-
-<div id="confirmationModal3" class="fixed inset-0 flex items-center justify-center z-50 hidden">
-   <!-- モーダルの内容 -->
- <div class="bg-white p-6 rounded shadow-lg mx-auto relative z-10" style="max-width: 330px;">
-    <h2 class="mb-4 text-lg font-bold">自身の役割に見合った目標設定ですか？またストレッチな目標になっていますか？</h2>
-<div class="flex justify-between">
-  <!-- YES ボタン -->
-  <button id="yesButton3" class="bg-green-500 text-white rounded p-2 w-5/12">SUBMIT</button>
-  <!-- NO ボタン -->
-  <button id="noButton3" class="bg-red-500 text-white rounded p-2 w-5/12 ml-2">NO</button>
-</div>
-  </div>
-</div>
 
     
 
@@ -214,27 +91,7 @@
 
       </div>
       
-           <div class="flex items-center justify-end mt-4">
-            <!-- 修正ボタン -->
-            <form action="{{ route('goal.edit', $goal->id) }}" method="GET" class="text-left">
-              @csrf
-              <x-primary-button>
-                <svg class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="gray">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                </svg>
-              </x-primary-button>
-            </form>
-
-            <!-- Submit ボタン -->
-            
-            <form action="{{ route('goal.create', $goal->id) }}" method="GET" class="text-left">
-              @csrf
-            <x-primary-button class="ml-3" id="submitButton">
-           {{ __('Submit') }}
-            </x-primary-button>
-            </form>
-        </div>
-      
+          
       
     </div>
   </div>
@@ -337,53 +194,6 @@ h3 {
 
 <script>
 
-document.addEventListener("DOMContentLoaded", function() {
-    
-    const submitButton = document.getElementById("submitButton");
-    const confirmationModal = document.getElementById("confirmationModal");
-    const confirmationModal2 = document.getElementById("confirmationModal2");
-    const confirmationModal3 = document.getElementById("confirmationModal3");
-    const yesButton = document.getElementById("yesButton");
-    const noButton = document.getElementById("noButton");
-    const yesButton2 = document.getElementById("yesButton2");
-    const noButton2 = document.getElementById("noButton2");
-    const yesButton3 = document.getElementById("yesButton3");
-    const noButton3 = document.getElementById("noButton3");
-
-    submitButton.addEventListener("click", function(e) {
-        e.preventDefault();  // Prevent form submission
-        confirmationModal.style.display = "flex";
-    });
-
-    yesButton.addEventListener("click", function() {
-        confirmationModal.style.display = "none";
-        confirmationModal2.style.display = "flex";
-    });
-
-    noButton.addEventListener("click", function() {
-        confirmationModal.style.display = "none";
-    });
-
-    yesButton2.addEventListener("click", function() {
-        confirmationModal2.style.display = "none";
-        confirmationModal3.style.display = "flex";
-    });
-
-    noButton2.addEventListener("click", function() {
-        confirmationModal2.style.display = "none";
-    });
-
-    yesButton3.addEventListener("click", function() {
-        confirmationModal3.style.display = "none";
-        window.location.href = "/goal/create"; 
-      
-        // Here, you can proceed with form submission or other actions.
-    });
-
-    noButton3.addEventListener("click", function() {
-        confirmationModal3.style.display = "none";
-    });
-});
 
 
 

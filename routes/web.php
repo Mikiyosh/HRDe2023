@@ -8,6 +8,8 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ActionController;
 use App\Http\Controllers\PreController;
 
+Route::get('/action/create', 'ActionController@create')->name('action.create');
+
 Route::middleware('auth')->group(function () {
     // 他のルート定義 ...
 
@@ -65,3 +67,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+

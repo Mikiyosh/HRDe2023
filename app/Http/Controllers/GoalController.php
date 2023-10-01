@@ -40,8 +40,14 @@ public function create()
     $myLatestAction = Action::where('user_id', Auth::user()->id)
         ->orderBy('updated_at', 'desc')
         ->first();
+        
+    $latestgoals = Goal::where('user_id', Auth::user()->id)
+        ->orderBy('updated_at', 'desc')
+        ->take(1)
+        ->get();
 
-    return view('goal.create', compact('myLatestGoal', 'otherUsersLatestGoals', 'myLatestAction'));
+
+    return view('goal.create', compact('myLatestGoal', 'otherUsersLatestGoals', 'myLatestAction','latestgoals'));
 }
 
     /**
@@ -72,7 +78,8 @@ public function store(Request $request)
     $data = $request->merge(['user_id' => Auth::user()->id])->all();
     $result = Goal::create($data);
   // ルーティング「goal.index」にリクエスト送信（一覧ページに移動）
-  return redirect()->route('goal.index');
+return redirect()->route('goal.edit', ['id' => $result->id]);
+
 }
 
 
@@ -94,14 +101,24 @@ public function store(Request $request)
      */
 public function edit($id)
 {
+    // アクションデータを取得
     $goal = Goal::find($id);
 
+    // データが存在しない場合のエラーハンドリング
     if (!$goal) {
-        return redirect()->back()->with('error', 'Goal not found');
+        abort(404); // もしくは適切なエラーページにリダイレクト
     }
 
+    // プレデータを取得
+   
+
+    // データが存在しない場合のエラーハンドリング
+ 
+
+    // ビューにデータを渡す
     return view('goal.edit', compact('goal'));
 }
+
 
 
 
@@ -125,7 +142,7 @@ public function update(Request $request, $id)
   }
   //データ更新処理
   $result = Goal::find($id)->update($request->all());
-  return redirect()->route('goal.index');
+  return redirect()->route('goal.create');
 }
 
     /**
@@ -148,12 +165,21 @@ public function update(Request $request, $id)
   
 public function timeline()
 {
-    $latestgoals = Goal::where('user_id', Auth::user()->id)
+    // ログインユーザーの最新の目標
+    $myLatestGoal = Goal::where('user_id', Auth::user()->id)
         ->orderBy('updated_at', 'desc')
-        ->take(1)
+        ->first();
+
+    // ログインユーザー以外のユーザーの最新の目標
+    $otherUsersLatestGoals = Goal::where('user_id', '!=', Auth::user()->id)
+        ->orderBy('updated_at', 'desc')
         ->get();
-    return response()->view('goal.show', compact('latestgoals'));
+
+    // ログインユーザーの最新のアクション
+    $myLatestAction = Action::where('user_id', Auth::user()->id)
+        ->orderBy('updated_at', 'desc')
+        ->first();
+
+    return view('goal.show', compact('myLatestGoal', 'otherUsersLatestGoals', 'myLatestAction'));
 }
-   
-  
 }

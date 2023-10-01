@@ -82,14 +82,10 @@
 
             
             <div class="flex items-center justify-end mt-4">
-              <a href="{{ url()->previous() }}">
-                <x-secondary-button class="ml-3">
-                  {{ __('Back') }}
-                </x-primary-button>
-              </a>
+   
               
               <x-primary-button class="ml-3">
-                {{ __('Update') }}
+                {{ __('Next') }}
               </x-primary-button>
             </div>
 </form>

@@ -28,7 +28,7 @@
     </x-nav-link>
     
 
-    <x-nav-link :href="route('goal.create')" :active="request()->routeIs('goal.create')">
+    <x-nav-link :href="route('pre.create')" :active="request()->routeIs('goal.create')">
       {{ __('Mypage') }}
     </x-nav-link>
 
@@ -37,7 +37,7 @@
         
         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
           <x-nav-link :href="route('goal.timeline')" :active="request()->routeIs('goal.timeline')">
-            {{ __('評価') }}
+            {{ __('タイムライン') }}
           </x-nav-link>
         </div>
         
@@ -115,7 +115,7 @@
     <x-nav-link :href="route('goal.index')" :active="request()->routeIs('goal.index')">
       {{ __('行動目標') }}
     </x-nav-link>
-       <x-nav-link :href="route('goal.create')" :active="request()->routeIs('goal.create')">
+       <x-nav-link :href="route('pre.create')" :active="request()->routeIs('goal.create')">
       {{ __('Mypage') }}
       </x-nav-link>
    
@@ -128,7 +128,7 @@
 
     <div class="pt-2 pb-3 space-y-1">
       <x-responsive-nav-link :href="route('goal.timeline')" :active="request()->routeIs('goal.timeline')">
-        {{ __('評価') }}
+        {{ __('タイムライン') }}
       </x-responsive-nav-link>
     </div>
     

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Validator;
 use App\Models\Pre;
+use App\Models\Goal; 
+use App\Models\Action; 
 use Auth;
 use App\Models\User;
 
@@ -27,17 +29,19 @@ public function index()
      */
 public function create()
 {
-    // ログインユーザーの最新の目標
-    $myLatestAction = Pre::where('user_id', Auth::user()->id)
+    
+    $myLatestGoal = Goal::where('user_id', Auth::user()->id)
         ->orderBy('updated_at', 'desc')
-        ->first();
-
-    // ログインユーザー以外のユーザーの最新の目標
-    $otherUsersLatestActions = Pre::where('user_id', '!=', Auth::user()->id)
+        ->first(); // 最初のレコードを取得
+        
+ 
+    $myLatestAction = Action::where('user_id', Auth::user()->id)
         ->orderBy('updated_at', 'desc')
-        ->get();
+        ->first(); // 最初のレコードを取得
+ 
 
-   return view('pre.create', compact('myLatestGoal', 'otherUsersLatestGoals','myLatestAction'));
+    
+   return view('pre.create', compact('myLatestAction', 'myLatestGoal'));
 
 }
     /**
@@ -83,8 +87,20 @@ public function store(Request $request)
         ->orderBy('updated_at', 'desc')
         ->take(1)
         ->get();
-    return response()->view('pre.show', compact('latestgoals'));
+    $otherUsersLatestGoals = Action::where('user_id', '!=', Auth::user()->id)
+        ->orderBy('updated_at', 'desc')
+        ->get();
+
+    return view('pre.show', compact('latestgoals', 'otherUsersLatestGoals'));
 }
+      
+
+
+
+
+
+
+
 
     /**
      * Show the form for editing the specified resource.

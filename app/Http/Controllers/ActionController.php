@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Validator;
 use App\Models\Action;
+use App\Models\Goal;
 use Auth;
 use App\Models\User;
 use App\Models\Pre;
@@ -13,7 +14,7 @@ class ActionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+   public function index()
     {
     $latestgoals = Action::where('user_id', Auth::user()->id)
         ->orderBy('updated_at', 'desc')
@@ -29,16 +30,26 @@ class ActionController extends Controller
 public function create()
 {
     // ログインユーザーの最新の目標
-    $myLatestAction = Action::where('user_id', Auth::user()->id)
+    $myLatestGoal = Goal::where('user_id', Auth::user()->id)
         ->orderBy('updated_at', 'desc')
         ->first();
 
     // ログインユーザー以外のユーザーの最新の目標
-    $otherUsersLatestActions = Action::where('user_id', '!=', Auth::user()->id)
+    $otherUsersLatestGoals = Goal::where('user_id', '!=', Auth::user()->id)
         ->orderBy('updated_at', 'desc')
         ->get();
 
-   return view('action.create', compact('myLatestGoal', 'otherUsersLatestGoals','myLatestAction'));
+    // ログインユーザーの最新のアクション
+    $myLatestAction = Action::where('user_id', Auth::user()->id)
+        ->orderBy('updated_at', 'desc')
+        ->first();
+
+    $latestgoals = Action::where('user_id', Auth::user()->id)
+        ->orderBy('updated_at', 'desc')
+        ->take(1)
+        ->get();
+        
+return view('pre.create', compact('myLatestGoal', 'otherUsersLatestGoals', 'myLatestAction', 'latestgoals'));
 
 }
     /**
@@ -58,7 +69,6 @@ public function store(Request $request)
     'action8' => 'required | max:191',
     'action9' => 'required | max:191',
 
-   
   ]);
   // バリデーション:エラー
   if ($validator->fails()) {
@@ -72,7 +82,8 @@ public function store(Request $request)
     $data = $request->merge(['user_id' => Auth::user()->id])->all();
     $result = Action::create($data);
   // ルーティング「goal.index」にリクエスト送信（一覧ページに移動）
-  return redirect()->route('action.create');
+return redirect()->route('action.edit', ['combinedId' => $result->id]); // combinedId パラメータを指定
+
 }
 
     /**
@@ -134,7 +145,7 @@ public function update(Request $request, $id)
   }
   //データ更新処理
   $result = Action::find($id)->update($request->all());
-  return redirect()->route('action.index');
+  return redirect()->route('action.create');
 }
 
     /**
