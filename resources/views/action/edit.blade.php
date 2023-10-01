@@ -43,7 +43,7 @@
             <x-input-label for="action2" :value="__('①')" class="mr-2"/>
             <x-text-input id="action2" class="block w-full" type="text" name="action2" value="{{ $preData->action2 }}" required autofocus />
         </div>
-        <x-input-error :messages="$errors->get('action1')" class="mt-2" />
+        <x-input-error :messages="$errors->get('action2')" class="mt-2" />
     </div>
     
         <div class="mb-4"> 
@@ -180,7 +180,7 @@
             <x-input-label for="action7" :value="__('①')" class="mr-2"/>
             <x-text-input id="action7" class="block w-full" type="text" name="action7" value="{{ $preData->action7 }}" required autofocus />
         </div>
-        <x-input-error :messages="$errors->get('action4')" class="mt-2" />
+        <x-input-error :messages="$errors->get('action7')" class="mt-2" />
     </div>
     
     <div class="mb-4"> 

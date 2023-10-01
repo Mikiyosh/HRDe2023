@@ -11,7 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pres', function (Blueprint $table) {
+        Schema::create('pre', function (Blueprint $table) {
+            $table->id();
             $table->id();
             $table->string('action1');
             $table->string('action2');
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->string('action8');
             $table->string('action9');
             $table->timestamps();
+            $table->timestamps();
         });
     }
 
@@ -31,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pres');
+        Schema::dropIfExists('pre');
     }
 };
